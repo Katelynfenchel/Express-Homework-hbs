@@ -13,6 +13,10 @@ var express = require('express'),
 
 var user = [{username: "", password: ""}];
 
+	app.get('/home', function(request, response){
+	response.render('home');
+});
+
 	app.get('/', function(request, response){
 		response.render('home');
 	});
@@ -39,22 +43,13 @@ var user = [{username: "", password: ""}];
 		for(i=0; i<user.length; i++){
 			if(loginUserName === user[i].username){
 				if(loginUserPassword === user[i].password){
-					response.render('home');
+					response.render('profile');
 				}else{
 					response.send('failure');
 				}
 			}
 		}
 	});
-
-	app.get('/movies', function(request, response){
-		ressponse.json({name: 'hi im movies'});
-	});
-
-	app.post('/movies', function(request, response){
-		console.log(request.body);
-		response.send({});
-	})
 
 	var dataFormOurDatabase = [{
 		"movie": "Almost Famous",
@@ -70,7 +65,17 @@ var user = [{username: "", password: ""}];
 	app.get('/profile', function(request, response){
 		response.render('profile', {userData: dataFormOurDatabase})
 
-	})
+	}),
+
+	app.get('/movies', function(request, response){
+		response.json({name: 'hi im movies'});
+	});
+
+	app.post('/movies', function(request, response){
+		console.log(request.body);
+		response.send({});
+	});
+
 
 
 
