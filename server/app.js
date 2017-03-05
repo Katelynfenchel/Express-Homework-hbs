@@ -13,6 +13,22 @@ var express = require('express'),
 
 var user = [{username: "", password: ""}];
 
+	var dataFormOurDatabase = [{
+		"movie": "Almost Famous",
+		"url": "https://upload.wikimedia.org/wikipedia/en/d/dd/Almost_famous_poster1.jpg",
+		"plot": "Highschool boy goes on tour with a band and writes a article about them for Rolling Stones magazine, he ends up falling for one of the girls who inlove with one of the band members! "
+	},{
+		"movie": "Empire Records",
+		"url": "https://i.jeded.com/i/empire-records.17069.jpg",
+		"plot": "Group of kids working at a record store and throw a concert to try to save the shop!"
+
+	}]
+
+	app.get('/profile', function(request, response){
+		response.render('profile', {userData: dataFormOurDatabase})
+
+	}),
+
 	app.get('/home', function(request, response){
 	response.render('home');
 });
@@ -43,7 +59,7 @@ var user = [{username: "", password: ""}];
 		for(i=0; i<user.length; i++){
 			if(loginUserName === user[i].username){
 				if(loginUserPassword === user[i].password){
-					response.render('profile');
+					response.render('profile', {userData: dataFormOurDatabase});
 				}else{
 					response.send('failure');
 				}
@@ -51,21 +67,21 @@ var user = [{username: "", password: ""}];
 		}
 	});
 
-	var dataFormOurDatabase = [{
-		"movie": "Almost Famous",
-		"url": "https://upload.wikimedia.org/wikipedia/en/d/dd/Almost_famous_poster1.jpg",
-		"plot": "Highschool boy goes on tour with a band and writes a article about them for Rolling Stones magazine, he ends up falling for one of the girls who inlove with one of the band members! "
-	},{
-		"movie": "Empire Records",
-		"url": "https://i.jeded.com/i/empire-records.17069.jpg",
-		"plot": "Group of kids working at a record store and throw a concert to try to save the shop!"
+	// var dataFormOurDatabase = [{
+	// 	"movie": "Almost Famous",
+	// 	"url": "https://upload.wikimedia.org/wikipedia/en/d/dd/Almost_famous_poster1.jpg",
+	// 	"plot": "Highschool boy goes on tour with a band and writes a article about them for Rolling Stones magazine, he ends up falling for one of the girls who inlove with one of the band members! "
+	// },{
+	// 	"movie": "Empire Records",
+	// 	"url": "https://i.jeded.com/i/empire-records.17069.jpg",
+	// 	"plot": "Group of kids working at a record store and throw a concert to try to save the shop!"
 
-	}]
+	// }]
 
-	app.get('/profile', function(request, response){
-		response.render('profile', {userData: dataFormOurDatabase})
+	// app.get('/profile', function(request, response){
+	// 	response.render('profile', {userData: dataFormOurDatabase})
 
-	}),
+	// }),
 
 	app.get('/movies', function(request, response){
 		response.json({name: 'hi im movies'});
@@ -75,27 +91,6 @@ var user = [{username: "", password: ""}];
 		console.log(request.body);
 		response.send({});
 	});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 	server.listen(3000, function(){
